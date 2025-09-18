@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Regalo Especial - 21 de Septiembre</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            image-rendering: pixelated;
+        }
+        
+        body {
+            font-family: 'Courier New', monospace;
+            background-color: #fff5cc;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+        
+        #app {
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            background-color: #ffffe6;
+            border: 4px solid #ffcc00;
+            padding: 20px;
+            box-shadow: 8px 8px 0 #ff9900;
+        }
+        
+        h1, h2, p {
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #ff6600;
+            font-size: 24px;
+            text-shadow: 2px 2px 0 #ffcc00;
+        }
+        
+        h2 {
+            color: #996600;
+            font-size: 20px;
+        }
+        
+        p {
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        button {
+            background-color: #ffcc00;
+            color: #663300;
+            border: 2px solid #996600;
+            padding: 8px 16px;
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        button:hover {
+            background-color: #ffdd33;
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .section {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+        
+        .active {
+            display: block;
+            opacity: 1;
+        }
+        
+        .petal-color {
+            color: #ff6600;
+            font-weight: bold;
+        }
+        
+        #countdown {
+            background-color: #fff0cc;
+            padding: 15px;
+            border: 3px solid #ff9900;
+            margin: 20px 0;
+        }
+        
+        #countdown h2 {
+            color: #ff6600;
+        }
+        
+        #countdown p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        #flower-container {
+            position: relative;
+            width: 200px;
+            height: 260px;
+            margin: 20px auto;
+        }
+        
+        .petal {
+            position: absolute;
+            width: 22px;
+            height: 60px;
+            background-color: #ffdd00;
+            border-radius: 60px 60px 20px 20px;
+            transform-origin: 50% 85%;
+            opacity: 0;
+            transition: opacity 0.5s;
+            border: 2px solid #ccaa00;
+            z-index: 5;
+        }
+        
+        .center {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-color: #663300;
+            border-radius: 50%;
+            top: 40px; /* antes 70px */
+            left: 70px;
+            z-index: 10;
+            border: 2px solid #442200;
+        }
+        
+        /* Ajuste del tallo */
+        .stem {
+            position: absolute;
+            width: 10px;
+            height: 120px;
+            background-color: #339900;
+            top: 100px; /* antes 120px */
+            left: 95px;
+            z-index: 0;
+            border: 2px solid #227700;
+        }
+        
+        /* Ajuste de la hoja */
+        .leaf {
+            position: absolute;
+            width: 30px;
+            height: 20px;
+            background-color: #44aa00;
+            border-radius: 50% 0 50% 50%;
+            top: 180px; /* antes 200px */
+            left: 85px;
+            z-index: 0;
+            transform: rotate(-30deg);
+            border: 2px solid #337700;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div id="countdown" class="hidden">
+            <h2>¡Todavía no es 21 de Septiembre!</h2>
+            <p>Faltan <span id="days">0</span> días, <span id="hours">0</span> horas, <span id="minutes">0</span> minutos y <span id="seconds">0</span> segundos</p>
+            <p>Vuelve en la fecha especial para descubrir tu regalo</p>
+        </div>
+        
+        <div id="content" class="hidden">
+            <!-- Girasol SIEMPRE visible -->
+            <div id="flower-container" style="margin-bottom: 20px;">
+                <div class="stem"></div>
+                <div class="center"></div>
+                <div class="leaf"></div>
+                <!-- Pétalos se agregarán dinámicamente -->
+            </div>
+            <!-- Sección 1 - Banner principal -->
+            <div id="section1" class="section active">
+                <h1>Este es mi regalo para nuestro primer 21</h1>
+                <button onclick="nextSection(2)">Comenzar →</button>
+            </div>
+            
+            <!-- Sección 2 -->
+            <div id="section2" class="section">
+                <h2>Un mensaje especial</h2>
+                <p>Hoy es un día para celebrarte y recordar lo especial que eres. Cada petalo de esta flor representa algo que admiro de ti.</p>
+                <button onclick="nextSection(3)">Continuar →</button>
+            </div>
+            
+            <!-- Sección 3 -->
+            <div id="section3" class="section">
+                <h2>Tu sonrisa</h2>
+                <p>Tu sonrisa ilumina cada lugar en el que estas, como el sol que sigue este girasol. Es contagiosa y llena de alegría. asi has llenado de luz mi vida <3 </p>
+                <button onclick="nextSection(4)">Siguiente →</button>
+            </div>
+            
+            <!-- Sección 4 -->
+            <div id="section4" class="section">
+                <h2>Tu fortaleza</h2>
+                <p>Admiro cómo enfrentas los desafíos con valentía y determinación, creciendo siempre hacia la luz. eres tan fuerte aun que no lo creas, te admiro demaciado</p>
+                <button onclick="nextSection(5)">Continuar →</button>
+            </div>
+            
+            <!-- Sección 5 -->
+            <div id="section5" class="section">
+                <h2>Tu generosidad</h2>
+                <p>Como el girasol que da semillas, tú siempre das lo mejor de ti a los demás sin esperar nada a cambio. eso es admirable en un mundo tan egosita</p>
+                <button onclick="nextSection(6)">Siguiente →</button>
+            </div>
+            
+            <!-- Sección 6 - Final -->
+            <div id="section6" class="section">
+                <h2>¡Feliz 21 de Septiembre AMOR!</h2>
+                <p>Que este día esté lleno de alegría, Te amo infinito y  vamos por mas momentos especiales. Eres increíble y mereces todo lo mejor.</p>
+                <p>Tu Siempre seras mi  <span class="petal-color">girasol</span> Favorito, ¡Te amo enormemente!</p>
+                <button onclick="resetSections()">Volver al inicio</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Verificar fecha
+        /*
+        function checkDate() {
+            const today = new Date();
+            const targetDate = new Date(today.getFullYear(), 8, 21); // Septiembre es el mes 8 (0-indexed)
+            
+            // Si es 21 de septiembre
+            if (today.getMonth() === 8 && today.getDate() === 21) {
+                document.getElementById('content').classList.remove('hidden');
+                document.getElementById('countdown').classList.add('hidden');
+                return true;
+            } else {
+                document.getElementById('content').classList.add('hidden');
+                document.getElementById('countdown').classList.remove('hidden');
+                startCountdown(targetDate);
+                return false;
+            }
+        }
+        */
+
+        // Inicializar (mostrar contenido siempre para pruebas)
+        document.getElementById('content').classList.remove('hidden');
+        document.getElementById('countdown').classList.add('hidden');
+        
+        // Contador regresivo
+        function startCountdown(targetDate) {
+            function updateCountdown() {
+                const now = new Date();
+                const diff = targetDate - now;
+                
+                if (diff <= 0) {
+                    checkDate();
+                    return;
+                }
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('days').textContent = days;
+                document.getElementById('hours').textContent = hours;
+                document.getElementById('minutes').textContent = minutes;
+                document.getElementById('seconds').textContent = seconds;
+            }
+            
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+  let currentSection = 1;
+let petalsCreated = 0;
+const totalSections = 6;
+
+function nextSection(next) {
+    document.getElementById(`section${currentSection}`).classList.remove('active');
+    document.getElementById(`section${next}`).classList.add('active');
+    currentSection = next;
+
+    const totalPetals = 12;
+
+    if (next > 1 && next < 6) {
+        createPetal();
+    }
+
+    if (next === 6) {
+        // Elimina todos los pétalos previos
+        const petals = document.querySelectorAll('.petal');
+        petals.forEach(petal => petal.remove());
+        petalsCreated = 0;
+        // Crea los 12 pétalos
+        for (let i = 0; i < totalPetals; i++) {
+            createPetal();
+        }
+    }
+}
+
+function createPetal() {
+    petalsCreated++;
+    const petal = document.createElement('div');
+    petal.className = 'petal';
+
+    const totalPetals = 12;
+    const angle = ((petalsCreated - 1) * (360 / totalPetals));
+    const centerX = 100; // centro del girasol
+    const centerY = 70;  // centro del girasol
+    const radius = 50;   // distancia desde el centro al borde del círculo marrón
+
+    const petalWidth = 22;
+    const petalHeight = 60;
+
+    const offsetX = petalWidth / 2;
+    const offsetY = petalHeight * 0.75; // ajuste para mejor alineación
+
+    const x = centerX + Math.cos(angle * Math.PI / 180) * radius - offsetX;
+    const y = centerY + Math.sin(angle * Math.PI / 180) * radius - offsetY;
+
+    petal.style.left = `${x}px`;
+    petal.style.top = `${y}px`;
+    petal.style.transform = `rotate(${angle + 90}deg)`;
+
+    setTimeout(() => {
+        petal.style.opacity = '1';
+    }, 50);
+
+    document.getElementById('flower-container').appendChild(petal);
+
+    if (currentSection === 6) {
+        // Si quieres mostrar el conteo en algún lugar, actualízalo aquí
+        // document.querySelector('.petal-count').textContent = petalsCreated;
+    }
+}
+
+function resetSections() {
+    for (let i = 1; i <= totalSections; i++) {
+        document.getElementById(`section${i}`).classList.remove('active');
+    }
+    document.getElementById('section1').classList.add('active');
+    currentSection = 1;
+
+    const petals = document.querySelectorAll('.petal');
+    petals.forEach(petal => petal.remove());
+    petalsCreated = 0;
+}
+
+        checkDate();
+    </script>
+</body>
+</html>
