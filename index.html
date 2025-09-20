@@ -232,22 +232,7 @@
     <script>
         // Verificar fecha
         
-        function checkDate() {
-            const today = new Date();
-            const targetDate = new Date(today.getFullYear(), 8, 21); // Septiembre es el mes 8 (0-indexed)
-            
-            // Si es 21 de septiembre
-            if (today.getMonth() === 8 && today.getDate() === 21) {
-                document.getElementById('content').classList.remove('hidden');
-                document.getElementById('countdown').classList.add('hidden');
-                return true;
-            } else {
-                document.getElementById('content').classList.add('hidden');
-                document.getElementById('countdown').classList.remove('hidden');
-                startCountdown(targetDate);
-                return false;
-            }
-        }
+      
 
         // Inicializar (mostrar contenido siempre para pruebas)
         document.getElementById('content').classList.remove('hidden');
